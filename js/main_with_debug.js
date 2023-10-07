@@ -32,96 +32,81 @@ function cities(){
     var headerRow = document.createElement("tr");
 
     //add the "City" and "Population" columns to the header row
-    headerRow.insertAdjacentHTML("beforeend","<th>City</th><th>Population</th>")
+    headerRow.insertAdjacentHTML('beforeend', '<th>City</th><th>Population</th>')
 
     //add the row to the table
     table.appendChild(headerRow);
 
-    //function that adds a column describing the city based on its population
-	function addColumns(cityPop){
-	    
-	    document.querySelectorAll("tr").forEach(function(row, i){
-
-	    	if (i == 0){
-
-	    		row.insertAdjacentHTML('beforeend', '<th>City Size</th>');
-	    	} else {
-
-	    		var citySize;
-	    		//Small cities have pops under 100,000
-	    		if (cityPop[i-1].population < 100000){
-	    			citySize = 'Small';
-
-	    		} else if (cityPop[i-1].population >= 100000 && cityPop[i-1].population < 500000){ //medium cities are 100k-500k
-	    			citySize = 'Medium';
-
-	    		} else {
-	    			citySize = 'Large'; //everything else is large
-	    		};
-
-				row.insertAdjacentHTML('<td>' + citySize + '</td>');
-	    	};
-	    });
-	};
-
-console.log("test the addColumns");
-console.log(addColumns(cityPop[1]));
-
     //loop to add a new row for each city
     for(var i = 0; i < cityPop.length; i++){
         //assign longer html strings to a variable
-        var rowHtml = "<tr><td>" + cityPop[i].city + "</td><td>" + cityPop[i].population + "</td></tr>";
+        var rowHtml = '<tr><td>' + cityPop[i].city + '</td><td>' + cityPop[i].population + '</td></tr>';
         //add the row's html string to the table
         table.insertAdjacentHTML('beforeend',rowHtml);
+
     };
 
+	
     //add the table to the div in index.html
-    document.querySelector("#mydiv").appendChild(table);
+    document.querySelector('#mydiv').appendChild(table);
 
-     //change the text color
-    document.querySelector('#mydiv').style.color = 'gray';
+    //anonymous function that adds a size category to each city based on its population
+    document.querySelectorAll("tr").forEach(function(row, i){
 
-    //change the text size and alignment
-    document.querySelector('#mydiv').style.fontSize = '1em';
-    document.querySelector('#mydiv').style.textAlign = 'center';
+		    	// adds the header for the column if i == 0
+		    	if (i == 0){
 
+		    		row.insertAdjacentHTML('beforeend', '<th>City Size</th>'); 
 
-/*
-	function addEvents(){
+		    	} else {
 
-		document.querySelector("table").addEventListener("mouseover", function(){
+		    		var citySize;
+		    		//Small cities have pops under 100,000
+		    		if (cityPop[i-1].population < 100000){
+		    			citySize = 'Small';
+
+		    		} else if (cityPop[i-1].population >= 100000 && cityPop[i-1].population < 500000){ //medium cities are 100k-500k
+		    			citySize = 'Medium';
+
+		    		} else {
+		    			citySize = 'Large'; //everything above 500k pop is large
+		    		};
+		    		// add the city size to the row once the logic is done
+					row.insertAdjacentHTML('beforeend', '<td>' + citySize + '</td>');
+		    	};
+		    });
+
+    // anonymous function that creates a series of click events
+    // first event assigns a random color the table will be displayed in on mouseover
+	document.querySelector("table").addEventListener("mouseover", function(){
 			
-			var color = "rgb(";
+			var myColor = "rgb(";
 
+			// this loop assigns a different, random color for each mouseover event
 			for (var i=0; i<3; i++){
 
 				var random = Math.round(Math.random() * 255);
 
-				color += "random";
+				myColor += random;
 
 				if (i<2){
-					color += ",";
+					myColor += ",";
 				
 				} else {
-					color += ")";
+					myColor += ")";
 			};
 
-			document.querySelector("table").color = color;
+			document.querySelector("table").style.color = myColor;
 		};
-
+		//function calls a pop up window with the text on a click
 		function clickme(){
 
 			alert('Hey, you clicked me!');
 		};
 
 		document.querySelector("table").addEventListener("click", clickme)
-	};
+	});
 };
-*/
-};
-
-var foo = cities();
-foo.addColumns();
 
 
 //call the initialize function when the window has loaded
