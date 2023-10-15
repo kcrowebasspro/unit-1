@@ -1,1 +1,1 @@
-This is a Readme file!
+Add images to the img folder

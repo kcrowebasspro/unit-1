@@ -98,6 +98,7 @@ function cities(){
 
 			document.querySelector("table").style.color = myColor;
 		};
+		/*
 		//function calls a pop up window with the text on a click
 		function clickme(){
 
@@ -105,9 +106,32 @@ function cities(){
 		};
 
 		document.querySelector("table").addEventListener("click", clickme)
+		*/
 	});
+
+
 };
 
+
+//This pair of functions calls, loads, parses and displays the GeoJSON file
+function jsAjax(){
+    //use Fetch to retrieve data
+    fetch('data/MegaCities.geojson')
+        .then(function(response){
+            return response.json();
+        })  //convert data to usable form
+        .then(callback) //send retrieved data to a callback function
+};
+
+//Function to store the response in a variable for parsing
+function callback(response){
+
+    var myData = response; //create the variable with the stored GeoJSON data
+    //use the queryselector to append the stringified JSON to the next spot on the page
+    document.querySelector("#mydiv").insertAdjacentHTML('beforeend', '<br>GeoJSON data:<br>' + JSON.stringify(myData))
+};
+// call the the jsAjax function -- the callback function gets called inside the jsAjax function
+window.onload = jsAjax();
 
 //call the initialize function when the window has loaded
 document.addEventListener('DOMContentLoaded',initialize)

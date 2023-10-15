@@ -1,1 +1,1 @@
-This is a Readme file!
+Add all JS libraries to the lib folder
