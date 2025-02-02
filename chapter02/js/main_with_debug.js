@@ -71,6 +71,7 @@ function addEvents(){
 		
 		var color = "rgb(";
 
+		// loop that adds random numbers to the color variable
 		for (var i=0; i<3; i++){
 
 			var random = Math.round(Math.random() * 255);
