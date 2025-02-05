@@ -2,8 +2,6 @@
 function initialize(){
     cities();
 	addEvents();
-	debugAjax();
-	//debugCallback();
 };
 
 // Putting the data and table creation in a function
@@ -106,24 +104,6 @@ function addEvents(){
 	document.querySelector("table").addEventListener("click", clickme);
 	document.querySelector("table").addEventListener("mouseover", randomColor);
 	
-};
-
-// function that fetches the GeoJSON data and returns it
-function debugAjax(){
-	
-    //use Fetch to retrieve data
-    fetch('data/MegaCities.geojson') // fetch the data
-        .then(function(response){
-            return response.json(); // return the data as JSON
-        }) 
-        .then(debugCallback) // call the debugCallback function to manipulate the response
-};
-
-// function that adds the GeoJSON data to the div in full text format
-function debugCallback(response){
-	document.querySelector("#myDiv").insertAdjacentHTML('beforeend', 'GeoJSON data: ' + JSON.stringify(response));
-	console.log('1:', response)
-
 };
 
 // call the initialize function when the window has loaded
